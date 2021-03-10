@@ -1,0 +1,108 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>The HTML5 Herald</title>
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint">
+
+  <link rel="stylesheet" href="/css/tailwind.css">
+</head>
+
+<body>
+  <div class="p-5 grid grid-cols-2">
+    <form id="invest-form">
+      <fieldset class="bg-gray-300 p-5 inline-block shadow-xl">
+        <legend class="bg-white py-1 px-2 text-2xl font-semibold">When can I retire?</legend>
+        <div class="p-3 py-4">
+          <label class="block mb-3 tracking-wide text-lg font-semibold">How old are you?</label>
+          <input class="py-2 px-4 w-20" type="number" name="age">
+        </div>
+        <div class="p-3 py-4">
+          <label class="block mb-3 tracking-wide text-lg font-semibold">What is the initial size of your investment?</label>
+          <div class="bg-gray-500 p-1 inline-block">
+            <span class="text-white px-3">£</span>
+            <input class="py-2 px-4 w-60" type="number" name="initial">
+          </div>
+        </div>
+        <div class="p-3 py-4">
+          <label class="block mb-3 tracking-wide text-lg font-semibold">What do you intend to contribute regularly?</label>
+          <p class="mb-4 text-gray-900">E.g. £300/month, £500/quarter, £1000/year, etc.</p>
+          <div class="bg-gray-500 p-1 inline-block">
+            <span class="text-white px-3">£</span>
+            <input class="py-2 px-4 w-48" type="number" name="regular_amount">
+            <select class="p-2 bg-gray-100" name="regular_frequency">
+              <option disabled>Frequency</option>
+              <option value="12">Monthly</option>
+              <option value="3">Quarterly</option>
+              <option value="1">Annually</option>
+            </select>
+          </div>
+        </div>
+        <div class="p-3 py-4">
+          <label class="block mb-3 tracking-wide text-lg font-semibold">What annual salary do your want to retire on?</label>
+          <div class="bg-gray-500 p-1 inline-block">
+            <span class="text-white px-3">£</span>
+            <input class="py-2 px-4 w-72" type="number" name="target_salary">
+          </div>
+        </div>
+        <div class="p-3 py-4">
+          <label class="block mb-3 tracking-wide text-lg font-semibold">What average rate of return do you predict?</label>
+          <p class="mb-4 text-gray-900">Leave this blank if you do not know. We'll use an average of 8% annual returns</p>
+          <div class="bg-gray-500 p-1 inline-block">
+            <input class="py-2 px-4 w-24" type="number" value="8" name="rate">
+            <span class="text-white px-3">%</span>
+          </div>
+        </div>
+
+        <div class="p3 py-4 text-right">
+          <button type="submit" class="bg-gray-700 font-semibold tracking-wide text-xl uppercase text-white p-2 px-6">Go</button>
+        </div>
+      </fieldset>
+
+      <!--<fieldset class="bg-gray-300 p-5 inline-block shadow-xl">
+        <legend class="bg-white py-1 px-2 text-2xl font-semibold">How much do I need to invest?</legend>
+        <div class="p-3 py-4">
+          <label class="block mb-3 tracking-wide text-lg font-semibold">How old are you?</label>
+          <input class="py-2 px-4 w-20" type="number">
+        </div>
+        <div class="p-3 py-4">
+          <label class="block mb-3 tracking-wide text-lg font-semibold">What age do you want to retire at?</label>
+          <input class="py-2 px-4 w-20" type="number">
+        </div>
+        <div class="p-3 py-4">
+          <label class="block mb-3 tracking-wide text-lg font-semibold">What is the initial size of your investment?</label>
+          <div class="bg-gray-500 p-1 inline-block">
+            <span class="text-white px-3">£</span>
+            <input class="py-2 px-4 w-60" type="number">
+          </div>
+        </div>
+        <div class="p-3 py-4">
+          <label class="block mb-3 tracking-wide text-lg font-semibold">What annual salary do your want to retire on?</label>
+          <div class="bg-gray-500 p-1 inline-block">
+            <span class="text-white px-3">£</span>
+            <input class="py-2 px-4 w-72" type="number">
+          </div>
+        </div>
+      </fieldset>-->
+    </form>
+
+    <div class="w-full p-5 pr-0">
+      <canvas id="myChart"></canvas>
+      <div>
+        <h1 class="text-2xl font-semibold my-3">Results</h1>
+        <form id="tweak-form">
+          <fieldset>
+            <legend>Tweaks</legend>
+
+            <input type="range" id="regular-amount">
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/main.js"></script>
+</body>
+</html>
