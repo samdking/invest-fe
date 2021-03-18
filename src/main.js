@@ -24,14 +24,14 @@ regularAmount.addEventListener('change', changeRegularAmount)
 function changeRegularAmount(e) {
   const formData = new FormData
   const data = JSON.parse(window.localStorage.getItem('invest_data'));
-  Object.entries(data).forEach((arr) => { [key, value] = arr; formData.set(key, value) });
-  data['regular_amount'] = e.target.value
+  Object.entries(data).forEach((arr) => { const [key, value] = arr; formData.set(key, value) });
+  formData.set('regular_amount', e.target.value)
   fetch('http://localhost:4567/invest', {
     method: 'POST',
     body: formData,
   })
     .then(response => response.json())
-    .then(data => renderChart(data.investment))
+    .then(data => renderChart(data.investment, false))
 }
 
 function processForm(e) {
@@ -49,15 +49,22 @@ function processForm(e) {
     .then(data => renderChart(data.investment))
 }
 
-function renderChart(data) {
+function renderChart(data, adjustSlider = true) {
   const returns = data.returns.map(year => year.returns)
   const invested = data.invested
   const labels = data.returns.map(year => year.age)
   const chart = document.getElementById('myChart')
   const ctx = chart ? chart.getContext('2d') : null;
 
-  regularAmount.setAttribute('min', data.regular.amount)
-  regularAmount.setAttribute('max', data.regular.amount * 2)
+  if (adjustSlider) {
+    const min = data.regular.amount
+    const max = data.regular.amount * 3
+    regularAmount.setAttribute('min', min)
+    document.querySelector('[data-min]').innerText = min
+    regularAmount.setAttribute('max', max)
+    document.querySelector('[data-max]').innerText = max
+
+  }
 
   if (ctx) {
     new Chart(ctx, {
