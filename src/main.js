@@ -3,7 +3,8 @@ import resolveConfig from 'tailwindcss/resolveConfig'
 
 const fullConfig = resolveConfig()
 const form = document.getElementById('invest-form')
-const regularAmount = document.getElementById('regular-amount')
+const regularAmountSlider = document.getElementById('regular-amount')
+const rateSlider = document.getElementById('rate')
 
 if (form.length) {
   form.addEventListener('submit', processForm)
@@ -19,13 +20,13 @@ if (form.length) {
   }
 }
 
-regularAmount.addEventListener('change', changeRegularAmount)
+regularAmountSlider.addEventListener('change', refreshValues)
+rateSlider.addEventListener('change', refreshValues)
 
-function changeRegularAmount(e) {
-  const formData = new FormData
+function refreshValues(e) {
+  const formData = new FormData(e.target.form)
   const data = JSON.parse(window.localStorage.getItem('invest_data'));
-  Object.entries(data).forEach((arr) => { const [key, value] = arr; formData.set(key, value) });
-  formData.set('regular_amount', e.target.value)
+  Object.entries(data).forEach((arr) => { const [key, value] = arr; if (!formData.has(key)) formData.set(key, value) });
   fetch('http://localhost:4567/invest', {
     method: 'POST',
     body: formData,
@@ -39,7 +40,6 @@ function processForm(e) {
   const data = new FormData(e.target);
   const store = {}
   data.forEach((value, key) => store[key] = value);
-  data.set('years', 10)
   window.localStorage.setItem('invest_data', JSON.stringify(store));
   fetch('http://localhost:4567/invest', {
     method: 'POST',
@@ -55,16 +55,36 @@ function renderChart(data, adjustSlider = true) {
   const labels = data.returns.map(year => year.age)
   const chart = document.getElementById('myChart')
   const ctx = chart ? chart.getContext('2d') : null;
+  const years = document.getElementById('fix-years')
 
   if (adjustSlider) {
-    const min = data.regular.amount
-    const max = data.regular.amount * 3
-    regularAmount.setAttribute('min', min)
-    document.querySelector('[data-min]').innerText = min
-    regularAmount.setAttribute('max', max)
-    document.querySelector('[data-max]').innerText = max
+    let min = data.regular.amount
+    let max = data.regular.amount * 3
 
+    regularAmountSlider.setAttribute('min', min)
+    document.querySelector('[data-regular-min]').innerText = min
+    regularAmountSlider.setAttribute('max', max)
+    document.querySelector('[data-regular-max]').innerText = max
+
+    min = data.rate - 3
+    max = data.rate + 3
+
+    rateSlider.value = data.rate
+    rateSlider.setAttribute('min', min)
+    document.querySelector('[data-rate-min]').innerText = min
+    rateSlider.setAttribute('max', max)
+    document.querySelector('[data-rate-max]').innerText = max
   }
+
+  document.getElementById('explanation').classList.remove('hidden')
+  document.querySelector('[data-returns]').innerText = data.total_returns.toLocaleString('en')
+  document.querySelector('[data-invested]').innerText = data.total_invested.toLocaleString('en')
+  document.querySelector('[data-duration]').innerText = returns.length
+  document.querySelector('[data-rate]').innerText = data.rate
+  document.querySelector('[data-regular').innerText = data.regular.amount.toLocaleString('en')
+  document.querySelector('[data-initial').innerText = data.initial.toLocaleString('en')
+  document.querySelector('[data-retirement-age').innerText = data.returns[data.returns.length - 1].age
+  years.value = data.returns.length
 
   if (ctx) {
     new Chart(ctx, {
@@ -73,7 +93,7 @@ function renderChart(data, adjustSlider = true) {
         labels: labels,
         datasets: [
           {
-            label: 'Predicted returns',
+            label: 'Estimated returns',
             data: returns,
             borderColor: fullConfig.theme.colors.green[500],
             backgroundColor: 'rgba(0, 0, 0, 0)',
