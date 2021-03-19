@@ -81,9 +81,9 @@ function renderChart(data, adjustSlider = true) {
   document.querySelector('[data-invested]').innerText = data.total_invested.toLocaleString('en')
   document.querySelector('[data-duration]').innerText = returns.length
   document.querySelector('[data-rate]').innerText = data.rate
-  document.querySelector('[data-regular').innerText = data.regular.amount.toLocaleString('en')
-  document.querySelector('[data-initial').innerText = data.initial.toLocaleString('en')
-  document.querySelector('[data-retirement-age').innerText = data.returns[data.returns.length - 1].age
+  document.querySelector('[data-regular]').innerText = data.regular.amount.toLocaleString('en')
+  document.querySelector('[data-initial]').innerText = data.initial.toLocaleString('en')
+  document.querySelector('[data-retirement-age]').innerText = data.returns[data.returns.length - 1].age
   years.value = data.returns.length
 
   if (ctx) {
