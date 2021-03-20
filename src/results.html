@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
 
-  <title>The HTML5 Herald</title>
+  <title>Results - Investments</title>
   <meta name="description" content="The HTML5 Herald">
   <meta name="author" content="SitePoint">
 
@@ -12,7 +12,44 @@
 </head>
 
 <body>
-  <div class="w-1/2">
+  <div class="p-5 max-w-screen-lg m-auto gap-5">
+    <div class="w-full p-5">
+      <canvas id="myChart"></canvas>
+      <div class="my-6">
+        <p id="explanation" class="hidden text-2xl leading-relaxed">
+          With an initial investment of <strong>£<span data-initial></span></strong>
+          and regular contributions of <strong>£<span data-regular></span></strong>,
+          your investment will have grown to <strong>£<span data-returns></span></strong>
+          after <strong><span data-duration></span> years</strong>
+          (at an average rate of return of <strong><span data-rate></span>%</strong>).<br>
+          You will have contributed <strong>£<span data-invested></span></strong> in total.
+        </p>
+        <form id="tweak-form" class="my-5 grid grid-cols-2 gap-3">
+          <fieldset class="bg-gray-100 p-5 border-dashed border-gray-300 border-2 my-5 text-lg">
+            <legend class="px-2 -mx-2 wide font-bold">Regular contributions</legend>
+
+            £<span data-regular-min></span>
+            <input class="mx-2" type="range" name="regular_amount" id="regular-amount">
+            £<span data-regular-max></span>
+          </fieldset>
+
+          <fieldset class="bg-gray-100 p-5 border-dashed border-gray-300 border-2 my-5 text-lg">
+            <legend class="px-2 -mx-2 wide font-bold">Rate of return</legend>
+
+            <span data-rate-min></span>%
+            <input class="mx-2" type="range" name="rate" id="rate">
+            <span data-rate-max></span>%
+          </fieldset>
+
+          <label>
+            <input type="checkbox" name="years" id="fix-years">
+            <span class="ml-2">
+              Fix retirement age at <span data-retirement-age></span>
+            </span>
+          </label>
+        </form>
+      </div>
+    </div>
   </div>
   <script type="module" src="/main.js"></script>
 </body>
