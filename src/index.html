@@ -12,8 +12,8 @@
 </head>
 
 <body>
-  <div class="p-5 grid grid-cols-2 gap-5">
-    <form id="invest-form">
+  <div class="p-5 m-auto max-w-screen-lg">
+    <form action="results.html" id="invest-form">
       <fieldset class="bg-gray-300 p-5 inline-block shadow-xl w-full">
         <legend class="bg-white py-1 px-2 text-2xl font-semibold">When can I retire?</legend>
         <div class="p-3 py-4">
@@ -28,7 +28,7 @@
           </div>
         </div>
         <div class="p-3 py-4">
-          <label class="block mb-3 tracking-wide text-lg font-semibold">What do you intend to contribute regularly?</label>
+          <label class="block mb-3 tracking-wide text-lg font-semibold">How much do you intend to contribute regularly?</label>
           <p class="mb-4 text-gray-900">E.g. £300/month, £500/quarter, £1000/year, etc.</p>
           <div class="bg-gray-500 p-1 inline-block">
             <span class="text-white px-3">£</span>
@@ -88,44 +88,6 @@
         </div>
       </fieldset>-->
     </form>
-
-    <div class="w-full mt-5 p-5">
-      <canvas id="myChart"></canvas>
-      <div class="my-5">
-        <p id="explanation" class="hidden text-2xl leading-relaxed">
-          With an initial investment of <strong>£<span data-initial></span></strong>
-          and regular contributions of <strong>£<span data-regular></span></strong>,
-          your investment will have grown to <strong>£<span data-returns></span></strong>
-          after <strong><span data-duration></span> years</strong>
-          (at an average rate of return of <strong><span data-rate></span>%</strong>).<br>
-          You will have contributed <strong>£<span data-invested></span></strong> in total.
-        </p>
-        <form id="tweak-form" class="my-5 grid grid-cols-2 gap-3">
-          <fieldset class="bg-gray-100 p-5 border-dashed border-gray-300 border-2 my-5 text-lg">
-            <legend class="px-2 -mx-2 wide font-bold">Regular contributions</legend>
-
-            £<span data-regular-min></span>
-            <input class="mx-2" type="range" name="regular_amount" id="regular-amount">
-            £<span data-regular-max></span>
-          </fieldset>
-
-          <fieldset class="bg-gray-100 p-5 border-dashed border-gray-300 border-2 my-5 text-lg">
-            <legend class="px-2 -mx-2 wide font-bold">Rate of return</legend>
-
-            <span data-rate-min></span>%
-            <input class="mx-2" type="range" name="rate" id="rate">
-            <span data-rate-max></span>%
-          </fieldset>
-
-          <label>
-            <input type="checkbox" name="years" id="fix-years">
-            <span class="ml-2">
-              Fix retirement age at <span data-retirement-age></span>
-            </span>
-          </label>
-        </form>
-      </div>
-    </div>
   </div>
   <script type="module" src="/main.js"></script>
 </body>

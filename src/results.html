@@ -17,20 +17,22 @@
       <canvas id="myChart"></canvas>
       <div class="my-6">
         <p id="explanation" class="hidden text-2xl leading-relaxed">
-          With an initial investment of <strong>£<span data-initial></span></strong>
-          and regular contributions of <strong>£<span data-regular></span></strong>,
-          your investment will have grown to <strong>£<span data-returns></span></strong>
-          after <strong><span data-duration></span> years</strong>
-          (at an average rate of return of <strong><span data-rate></span>%</strong>).<br>
-          You will have contributed <strong>£<span data-invested></span></strong> in total.
+          With an initial investment of <strong class="text-green-600">£<span data-initial></span></strong>
+          and regular <span data-regular-frequency></span> contributions of <strong class="text-green-600">£<span data-regular></span></strong>,<br>
+          You will have contributed <strong class="text-green-600">£<span data-invested></span></strong>
+          over <strong><span data-duration></span> years</strong>.<br>
+          Your investment will have grown to <strong class="text-blue-500">£<span data-returns></span></strong>
+          (at an average rate of return of <strong class="text-blue-500"><span data-rate></span>%</strong>).<br>
+          Using the <strong>4% rule</strong>, your annual salary would be <strong><span data-salary></span></strong>.
         </p>
         <form id="tweak-form" class="my-5 grid grid-cols-2 gap-3">
           <fieldset class="bg-gray-100 p-5 border-dashed border-gray-300 border-2 my-5 text-lg">
             <legend class="px-2 -mx-2 wide font-bold">Regular contributions</legend>
-
-            £<span data-regular-min></span>
-            <input class="mx-2" type="range" name="regular_amount" id="regular-amount">
-            £<span data-regular-max></span>
+            <button data-plus="50" class="rounded-md mx-1 bg-red-400 py-1 px-2 text-white text-sm font-semibold">+50</button>
+            <button data-plus="100" class="rounded-md mx-1 bg-red-600 py-1 px-2 text-white text-sm font-semibold">+100</button>
+            <button data-plus="250" class="rounded-md mx-1 bg-red-700 py-1 px-2 text-white text-sm font-semibold">+250</button>
+            <input id="regular-amount-custom" class="rounded-md float-right mx-1 border border-gray-400 shadow-sm bg-white py-1 px-2 w-20 text-sm" type="number">
+            <input type="hidden" name="regular_amount" id="regular-amount">
           </fieldset>
 
           <fieldset class="bg-gray-100 p-5 border-dashed border-gray-300 border-2 my-5 text-lg">
@@ -44,7 +46,7 @@
           <label>
             <input type="checkbox" name="years" id="fix-years">
             <span class="ml-2">
-              Fix retirement age at <span data-retirement-age></span>
+              Fix retirement term at <span data-retirement-term></span>
             </span>
           </label>
         </form>
