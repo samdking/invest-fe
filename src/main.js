@@ -4,6 +4,7 @@ import resolveConfig from 'tailwindcss/resolveConfig'
 const tailwindConfig = resolveConfig()
 const form = document.getElementById('invest-form')
 const regularAmount = document.getElementById('regular-amount')
+const regularAmountCustom = document.getElementById('regular-amount-custom')
 const rateSlider = document.getElementById('rate')
 const regularBoosts = document.querySelectorAll('[data-plus]')
 const chart = document.getElementById('myChart')
@@ -21,25 +22,53 @@ if (data) {
     }
   })
 
-  if (chart) populateChartWithData(formData)
+  if (chart) {
+    populateChartWithData(formData).then(data => {
+      regularAmount.dataset.base = data.regular.amount
+      regularAmount.value = data.regular.amount
+
+      const min = Math.min(data.rate - 3, 5)
+      const max = 15
+
+      rateSlider.setAttribute('min', min)
+      document.querySelector('[data-rate-min]').innerText = min
+      rateSlider.setAttribute('max', max)
+      document.querySelector('[data-rate-max]').innerText = max
+      rateSlider.value = data.rate
+    })
+  }
 }
 
 if (form) form.addEventListener('submit', processForm)
 if (rateSlider) rateSlider.addEventListener('change', refreshValues)
 
-function populateChartWithData(data, adjustSlider = true) {
-  fetch('http://localhost:4567/invest', {
+if (regularAmountCustom) {
+  regularAmountCustom.addEventListener('change', specifyRegular)
+  regularAmountCustom.addEventListener('blur', specifyRegular)
+}
+
+regularBoosts.forEach(elem => {
+  elem.addEventListener('click', boostRegular)
+})
+
+function populateChartWithData(data) {
+  return fetch('http://localhost:4567/invest', {
     method: 'POST',
     body: data,
   })
     .then(response => response.json())
-    .then(data => renderChart(data.investment, adjustSlider))
+    .then(data => renderChart(data.investment))
 }
 
 function refreshValues(e) {
   const formData = new FormData(e.target.form)
-  Object.entries(data).forEach((arr) => { const [key, value] = arr; if (!formData.has(key)) formData.set(key, value) });
-  populateChartWithData(formData, false)
+
+  Object.entries(data).forEach((arr) => {
+    const [key, value] = arr
+    if (!formData.has(key)) formData.set(key, value)
+  })
+
+  populateChartWithData(formData)
 }
 
 function processForm(e) {
@@ -53,28 +82,35 @@ function boostRegular(e) {
   e.preventDefault()
 
   const base = regularAmount.dataset.base
+  const newValue = parseInt(e.target.dataset.plus) + parseInt(base)
 
-  if (e.target.dataset.plus) {
-    const newValue = parseInt(e.target.dataset.plus) + parseInt(base)
-    if (newValue != regularAmount.value) {
-      regularBoosts.forEach(elem => {
-        elem.classList.add('opacity-30')
-      })
-      e.target.classList.remove('opacity-30')
-      regularAmount.value = newValue
-    } else {
-      regularAmount.value = base
-      regularBoosts.forEach(elem => {
-        elem.classList.remove('opacity-30')
-      })
-    }
+  if (newValue != regularAmount.value) {
+    regularBoosts.forEach(elem => {
+      elem.classList.add('opacity-30')
+    })
+    e.target.classList.remove('opacity-30')
+    regularAmount.value = newValue
   } else {
-    if (e.target.value == '') return
+    regularAmount.value = base
     regularBoosts.forEach(elem => {
       elem.classList.remove('opacity-30')
     })
-    regularAmount.value = e.target.value
   }
+
+  refreshValues(e)
+}
+
+function specifyRegular(e) {
+  e.preventDefault()
+
+  if (e.target.value == '') return
+
+  regularBoosts.forEach(elem => {
+    elem.classList.remove('opacity-30')
+  })
+
+  regularAmount.value = e.target.value
+
   refreshValues(e)
 }
 
@@ -90,28 +126,6 @@ function renderChart(data, adjustSlider = true) {
   const labels = data.returns.map(year => year.age)
   const ctx = chart ? chart.getContext('2d') : null
   const years = document.getElementById('fix-years')
-
-  if (adjustSlider) {
-    regularAmount.dataset.base = data.regular.amount
-    regularAmount.value = data.regular.amount
-
-    const min = Math.min(data.rate - 3, 5)
-    const max = 15
-
-    rateSlider.setAttribute('min', min)
-    document.querySelector('[data-rate-min]').innerText = min
-    rateSlider.setAttribute('max', max)
-    document.querySelector('[data-rate-max]').innerText = max
-    rateSlider.value = data.rate
-  }
-
-  ['blur', 'change'].forEach(ev => {
-    document.getElementById('regular-amount-custom').addEventListener(ev, boostRegular)
-  })
-
-  regularBoosts.forEach(elem => {
-    elem.addEventListener('click', boostRegular)
-  })
 
   document.getElementById('explanation').classList.remove('hidden')
   document.querySelector('[data-returns]').innerText = formatMoney(data.total_returns)
@@ -158,5 +172,7 @@ function renderChart(data, adjustSlider = true) {
         }
       }
     });
+
+    return data
   }
 }
