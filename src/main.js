@@ -8,6 +8,7 @@ const regularAmountCustom = document.getElementById('regular-amount-custom')
 const rateSlider = document.getElementById('rate')
 const regularBoosts = document.querySelectorAll('[data-plus]')
 const chart = document.getElementById('myChart')
+const inflation = document.getElementById('inflation')
 
 const store = window.localStorage.getItem('invest_data')
 const data = store ? JSON.parse(store) : null
@@ -27,6 +28,12 @@ if (data) {
       regularAmount.dataset.base = data.regular.amount
       regularAmount.value = data.regular.amount
 
+      inflation.value = data.inflation
+
+      if (data.inflation > 0) {
+        inflation.checked = true
+      }
+
       const min = Math.min(data.rate - 3, 5)
       const max = 15
 
@@ -41,6 +48,7 @@ if (data) {
 
 if (form) form.addEventListener('submit', processForm)
 if (rateSlider) rateSlider.addEventListener('change', refreshValues)
+if (inflation) inflation.addEventListener('change', refreshValues)
 
 if (regularAmountCustom) {
   regularAmountCustom.addEventListener('change', specifyRegular)
@@ -137,6 +145,7 @@ function renderChart(data, adjustSlider = true) {
   document.querySelector('[data-initial]').innerText = formatMoney(data.initial)
   document.querySelector('[data-retirement-term]').innerText = data.returns.length
   document.querySelector('[data-salary]').innerText = formatMoney(data.annual_salary)
+  document.querySelector('[data-inflation]').innerText = data.inflation
   years.value = data.returns.length
 
   if (ctx) {

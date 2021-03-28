@@ -23,32 +23,45 @@
           over <strong><span data-duration></span> years</strong>.<br>
           Your investment will have grown to <strong class="text-blue-500">£<span data-returns></span></strong>
           (at an average rate of return of <strong class="text-blue-500"><span data-rate></span>%</strong>).<br>
-          Using the <strong>4% rule</strong>, your annual salary would be <strong><span data-salary></span></strong>.
+          Using the <strong>4% rule</strong>, your annual salary would be <strong><span data-salary></span></strong>.<br>
+          Inflation is set at <strong><span data-inflation></span>%</strong>.
         </p>
-        <form id="tweak-form" class="my-5 grid grid-cols-2 gap-3">
-          <fieldset class="bg-gray-100 p-5 border-dashed border-gray-300 border-2 my-5 text-lg">
-            <legend class="px-2 -mx-2 wide font-bold">Regular contributions</legend>
-            <button data-plus="50" class="rounded-md mx-1 bg-red-400 py-1 px-2 text-white text-sm font-semibold">+50</button>
-            <button data-plus="100" class="rounded-md mx-1 bg-red-600 py-1 px-2 text-white text-sm font-semibold">+100</button>
-            <button data-plus="250" class="rounded-md mx-1 bg-red-700 py-1 px-2 text-white text-sm font-semibold">+250</button>
-            <input id="regular-amount-custom" class="rounded-md float-right mx-1 border border-gray-400 shadow-sm bg-white py-1 px-2 w-20 text-sm" type="number">
-            <input type="hidden" name="regular_amount" id="regular-amount">
-          </fieldset>
+        <form id="tweak-form" class="my-5">
+          <div class="grid grid-cols-2 gap-3">
+            <fieldset class="bg-gray-100 p-5 border-dashed border-gray-300 border-2 my-5 text-lg">
+              <legend class="px-2 -mx-2 wide font-bold">Regular contributions</legend>
+              <button data-plus="50" class="rounded-md mx-1 bg-red-400 py-1 px-2 text-white text-sm font-semibold">+50</button>
+              <button data-plus="100" class="rounded-md mx-1 bg-red-600 py-1 px-2 text-white text-sm font-semibold">+100</button>
+              <button data-plus="250" class="rounded-md mx-1 bg-red-700 py-1 px-2 text-white text-sm font-semibold">+250</button>
+              <input id="regular-amount-custom" class="rounded-md float-right mx-1 border border-gray-400 shadow-sm bg-white py-1 px-2 w-20 text-sm" type="number">
+              <input type="hidden" name="regular_amount" id="regular-amount">
+            </fieldset>
 
-          <fieldset class="bg-gray-100 p-5 border-dashed border-gray-300 border-2 my-5 text-lg">
-            <legend class="px-2 -mx-2 wide font-bold">Rate of return</legend>
+            <fieldset class="bg-gray-100 p-5 border-dashed border-gray-300 border-2 my-5 text-lg">
+              <legend class="px-2 -mx-2 wide font-bold">Rate of return</legend>
 
-            <span data-rate-min></span>%
-            <input class="mx-2" type="range" name="rate" id="rate">
-            <span data-rate-max></span>%
-          </fieldset>
+              <span data-rate-min></span>%
+              <input class="mx-2" type="range" name="rate" id="rate">
+              <span data-rate-max></span>%
+            </fieldset>
+          </div>
 
-          <label>
-            <input type="checkbox" name="years" id="fix-years">
-            <span class="ml-2">
-              Fix retirement term at <span data-retirement-term></span>
-            </span>
-          </label>
+          <div class="space-x-4">
+            <label>
+              <input type="checkbox" name="years" id="fix-years">
+              <span class="ml-1">
+                Fix retirement term at <span data-retirement-term></span>
+              </span>
+            </label>
+
+            <label>
+              <input type="hidden" name="inflation" value="0">
+              <input type="checkbox" name="inflation" id="inflation" value="3">
+              <span class="ml-1">
+                Model inflation
+              </span>
+            </label>
+          </div>
         </form>
       </div>
     </div>
