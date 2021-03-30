@@ -135,8 +135,6 @@ function renderChart(data, adjustSlider = true) {
   const ctx = chart ? chart.getContext('2d') : null
   const years = document.getElementById('fix-years')
 
-  debugger
-
   document.getElementById('explanation').classList.remove('hidden')
   document.querySelector('[data-returns]').innerText = formatMoney(data.total_returns)
   document.querySelector('[data-invested]').innerText = formatMoney(data.total_invested)
