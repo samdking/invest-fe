@@ -60,7 +60,7 @@ regularBoosts.forEach(elem => {
 })
 
 function populateChartWithData(data) {
-  return fetch('http://localhost:4567/invest', {
+  return fetch(`http://${window.location.hostname}:4567/invest`, {
     method: 'POST',
     body: data,
   })

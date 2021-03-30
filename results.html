@@ -7,63 +7,71 @@
   <title>Results - Investments</title>
   <meta name="description" content="The HTML5 Herald">
   <meta name="author" content="SitePoint">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/css/tailwind.css">
 </head>
 
 <body>
-  <div class="p-5 max-w-screen-lg m-auto gap-5">
-    <div class="w-full p-5">
-      <canvas id="myChart"></canvas>
-      <div class="my-6">
-        <p id="explanation" class="hidden text-2xl leading-relaxed">
+  <div class="max-w-screen-lg m-auto gap-5 w-full p-5">
+    <canvas id="myChart"></canvas>
+    <div class="mt-6">
+      <div id="explanation" class="hidden text-2xl leading-relaxed space-y-2">
+        <p>
           With an initial investment of <strong class="text-green-600">£<span data-initial></span></strong>
-          and regular <span data-regular-frequency></span> contributions of <strong class="text-green-600">£<span data-regular></span></strong>,<br>
+          and regular <span data-regular-frequency></span> contributions of <strong class="text-green-600">£<span data-regular></span></strong>,
+        </p>
+        <p>
           You will have contributed <strong class="text-green-600">£<span data-invested></span></strong>
-          over <strong><span data-duration></span> years</strong>.<br>
+          over <strong><span data-duration></span> years</strong>.
+        </p>
+        <p>
           Your investment will have grown to <strong class="text-blue-500">£<span data-returns></span></strong>
-          (at an average rate of return of <strong class="text-blue-500"><span data-rate></span>%</strong>).<br>
-          Using the <strong>4% rule</strong>, your annual salary would be <strong><span data-salary></span></strong>.<br>
+          (at an average rate of return of <strong class="text-blue-500"><span data-rate></span>%</strong>).
+        </p>
+        <p>
+          Using the <strong>4% rule</strong>, your annual salary would be <strong><span data-salary></span></strong>.
+        </p>
+        <p>
           Inflation is set at <strong><span data-inflation></span>%</strong>.
         </p>
-        <form id="tweak-form" class="my-5">
-          <div class="grid grid-cols-2 gap-3">
-            <fieldset class="bg-gray-100 p-5 border-dashed border-gray-300 border-2 my-5 text-lg">
-              <legend class="px-2 -mx-2 wide font-bold">Regular contributions</legend>
-              <button data-plus="50" class="rounded-md mx-1 bg-red-400 py-1 px-2 text-white text-sm font-semibold">+50</button>
-              <button data-plus="100" class="rounded-md mx-1 bg-red-600 py-1 px-2 text-white text-sm font-semibold">+100</button>
-              <button data-plus="250" class="rounded-md mx-1 bg-red-700 py-1 px-2 text-white text-sm font-semibold">+250</button>
-              <input id="regular-amount-custom" class="rounded-md float-right mx-1 border border-gray-400 shadow-sm bg-white py-1 px-2 w-20 text-sm" type="number">
-              <input type="hidden" name="regular_amount" id="regular-amount">
-            </fieldset>
-
-            <fieldset class="bg-gray-100 p-5 border-dashed border-gray-300 border-2 my-5 text-lg">
-              <legend class="px-2 -mx-2 wide font-bold">Rate of return</legend>
-
-              <span data-rate-min></span>%
-              <input class="mx-2" type="range" name="rate" id="rate">
-              <span data-rate-max></span>%
-            </fieldset>
-          </div>
-
-          <div class="space-x-4">
-            <label>
-              <input type="checkbox" name="years" id="fix-years">
-              <span class="ml-1">
-                Fix retirement term at <span data-retirement-term></span>
-              </span>
-            </label>
-
-            <label>
-              <input type="hidden" name="inflation" value="0">
-              <input type="checkbox" name="inflation" id="inflation" value="3">
-              <span class="ml-1">
-                Model inflation
-              </span>
-            </label>
-          </div>
-        </form>
       </div>
+      <form id="tweak-form">
+        <div class="grid md:grid-cols-2 gap-x-3 gap-y-5 my-7">
+          <fieldset class="bg-gray-100 p-5 border-dashed border-gray-300 border-2 md:text-lg text-xl">
+            <legend class="px-2 mx-auto md:-mx-2 wide font-bold">Regular contributions</legend>
+            <button data-plus="50" class="rounded-md mx-1 bg-red-400 py-1 px-2 text-white text-sm font-semibold">+50</button>
+            <button data-plus="100" class="rounded-md mx-1 bg-red-600 py-1 px-2 text-white text-sm font-semibold">+100</button>
+            <button data-plus="250" class="rounded-md mx-1 bg-red-700 py-1 px-2 text-white text-sm font-semibold">+250</button>
+            <input id="regular-amount-custom" class="rounded-md float-right mx-1 border border-gray-400 shadow-sm bg-white py-1 px-2 w-20 text-sm" type="number">
+            <input type="hidden" name="regular_amount" id="regular-amount">
+          </fieldset>
+
+          <fieldset class="bg-gray-100 p-5 border-dashed border-gray-300 border-2 text-lg">
+            <legend class="px-2 mx-auto md:-mx-2 wide font-bold">Rate of return</legend>
+
+            <span data-rate-min></span>%
+            <input class="mx-2" type="range" name="rate" id="rate">
+            <span data-rate-max></span>%
+          </fieldset>
+        </div>
+
+        <div class="space-x-4">
+          <label>
+            <input type="checkbox" name="years" id="fix-years">
+            <span class="ml-1">
+              Fix term at <span data-retirement-term></span> years
+            </span>
+          </label>
+
+          <label>
+            <input type="hidden" name="inflation" value="0">
+            <input type="checkbox" name="inflation" id="inflation" value="3">
+            <span class="ml-1">
+              Model inflation
+            </span>
+          </label>
+        </div>
+      </form>
     </div>
   </div>
   <script type="module" src="/main.js"></script>
