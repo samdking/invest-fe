@@ -60,7 +60,9 @@ regularBoosts.forEach(elem => {
 })
 
 function populateChartWithData(data) {
-  return fetch(`http://${window.location.hostname}:4567/invest`, {
+  const host = window.location.hostname == 'localhost' ? 'http://localhost:4567' : "https://retirable.herokuapp.com"
+
+  return fetch(`${host}/invest`, {
     method: 'POST',
     body: data,
   })
