@@ -19,7 +19,14 @@ if (data) {
     const [key, value] = field
     formData.set(key, value)
     if (form) {
-      form.querySelector(`[name='${key}']`).value = value
+      let input = form.querySelector(`[name='${key}']`)
+      if (input.type == 'checkbox') {
+        input.checked = value == '1'
+      } else if (input.type == 'select') {
+        input.selected = value
+      } else if (input.type != 'hidden') {
+        input.value = value
+      }
     }
   })
 
