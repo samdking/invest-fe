@@ -12,97 +12,119 @@
 </head>
 
 <body>
-  <div class="p-5 m-auto max-w-screen-lg">
+  <div class="md:p-5 m-auto max-w-screen-lg">
     <form action="results.html" id="invest-form">
-      <h1 class="my-7 text-3xl font-semibold">When can I retire?</h1>
-      <div class="bg-gray-300 p-5 inline-block shadow-xl w-full">
-        <div class="p-3 py-4">
-          <label for="age" class="block mb-3 tracking-wide text-lg font-semibold">How old are you?</label>
-          <input id="age" class="py-2 px-4 w-20" type="number" name="age">
-        </div>
-        <div class="p-3 py-4">
-          <label for="initial" class="block mb-3 tracking-wide text-lg font-semibold">What is the initial size of your investment?</label>
-          <div class="bg-gray-500 p-1 inline-block">
-            <span class="text-white px-3">£</span>
-            <input id="initial" class="py-2 px-4 w-60" type="number" name="initial">
-          </div>
-        </div>
-        <div class="p-3 py-4">
-          <label for="regular" class="block mb-3 tracking-wide text-lg font-semibold">How much do you intend to contribute regularly?</label>
-          <p class="mb-4 text-gray-900">E.g. £300/month, £500/quarter, £1000/year, etc.</p>
-          <div class="bg-gray-500 p-1 inline-block">
-            <span class="text-white px-3">£</span>
-            <input id="regular" class="py-2 px-4 w-48" type="number" name="regular_amount">
-            <select class="p-2 bg-gray-100" name="regular_frequency">
-              <option disabled>Frequency</option>
-              <option value="12">Monthly</option>
-              <option value="3">Quarterly</option>
-              <option value="1">Annually</option>
-            </select>
-          </div>
-        </div>
-        <div class="p-3 py-4">
-          <label for="salary" class="block mb-3 tracking-wide text-lg font-semibold">What annual salary do your want to retire on?</label>
-          <p class="mb-4 text-gray-900">In today's money. Consider your monthly living costs may be lower than they are currently.</p>
-          <div class="bg-gray-500 p-1 inline-block">
-            <span class="text-white px-3">£</span>
-            <input id="salary" class="py-2 px-4 w-72" type="number" name="target_salary">
-          </div>
-        </div>
-        <div class="p-3 py-4">
-          <label for="rate" class="block mb-3 tracking-wide text-lg font-semibold">What average rate of return do you predict?</label>
-          <p class="mb-4 text-gray-900">Leave this unchanged if you do not know. We'll use an average of 8% annual returns.</p>
-          <div class="bg-gray-500 p-1 inline-block">
-            <input id="rate" class="py-2 px-4 w-24" type="number" value="8" name="rate">
-            <span class="text-white px-3">%</span>
+      <h1 class="mx-8 sm:mx-0 my-5 text-3xl font-semibold">When can I retire?</h1>
+      <div class="bg-gray-300 py-5 px-8 inline-block shadow-xl w-full mt-4">
+        <div class="py-4">
+          <label for="age" class="block mb-2 tracking-wide text-lg font-semibold">How old are you?</label>
+          <div class="rounded-sm shadow-sm w-32">
+            <input type="number" id="age" name="age" class="p-2 focus:ring-teal-600 focus:border-teal-600 block w-full pl-4 border-gray-400 rounded-md">
           </div>
         </div>
 
-        <fieldset class="m-3 px-5 border-2 border-dashed border-gray-600">
+        <div class="py-4">
+          <label for="initial" class="block mb-2 tracking-wide text-lg font-semibold">What is the initial size of your investment?</label>
+          <div class="relative rounded-sm shadow-sm max-w-md mt-4">
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <span class="text-gray-500">£</span>
+            </div>
+            <input type="number" id="initial" name="initial" class="p-2 focus:ring-teal-600 focus:border-teal-600 block w-full pl-9 border-gray-400 rounded-md">
+          </div>
+        </div>
+
+        <div class="py-4">
+          <label for="regular" class="block mb-2 tracking-wide text-lg font-semibold">How much do you intend to contribute regularly?</label>
+          <p class="text-gray-800">E.g. £300/month, £500/quarter, £1000/year, etc.</p>
+          <div class="relative rounded-sm shadow-sm max-w-sm mt-4">
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <span class="text-gray-500">£</span>
+            </div>
+            <input type="number" id="regular" name="regular_amount" class="p-2 focus:ring-teal-600 focus:border-teal-600 block w-full pl-9 pr-28 border-gray-400 rounded-md">
+            <div class="absolute inset-y-0 right-0 flex items-center">
+              <label for="currency" class="sr-only">Currency</label>
+              <select id="currency" name="currency" class="focus:ring-teal-600 focus:border-teal-600 h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-md">
+                <option disabled>Frequency</option>
+                <option value="12">Monthly</option>
+                <option value="3">Quarterly</option>
+                <option value="1">Annually</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="py-4">
+          <label for="salary" class="block mb-2 tracking-wide text-lg font-semibold">What annual salary do your want to retire on?</label>
+          <p class="text-gray-800">In today's money. Consider your monthly living costs may be lower than they are currently.</p>
+          <div class="relative rounded-sm shadow-sm max-w-md mt-4">
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <span class="text-gray-500">£</span>
+            </div>
+            <input type="number" id="salary" name="target_salary" class="p-2 focus:ring-teal-600 focus:border-teal-600 block w-full pl-9 border-gray-400 rounded-md">
+          </div>
+        </div>
+
+        <div class="py-4">
+          <label for="rate" class="block mb-2 tracking-wide text-lg font-semibold">What average rate of return do you expect from your investment?</label>
+          <p class="text-gray-800">Leave this unchanged if you do not know. We'll use an average of 8% annual returns.</p>
+          <div class="relative rounded-sm shadow-sm w-32 mt-4">
+            <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+              <span class="text-gray-500">%</span>
+            </div>
+            <input type="number" id="rate" name="rate" value="8" class="p-2 focus:ring-teal-600 focus:border-teal-600 block w-full pl-4 pr-10 border-gray-400 rounded-md">
+          </div>
+        </div>
+
+        <fieldset class="my-3 px-5 border-2 border-dashed border-gray-600">
           <legend class="text-lg px-2 font-bold tracking-wide">Inflation</legend>
           <div class="my-5">
-            <label for="inflation" class="text-lg block mb-3 text-gray-900 font-bold tracking-wide">Simulate an average annual rate of inflation?</label>
-            <p class="mb-4 text-gray-900">3% is considered the average rate of inflation</p>
-            <div class="bg-gray-500 p-1 inline-block">
-              <input id="inflation" class="py-2 px-4 w-24" type="number" value="3" name="inflation">
-              <span class="text-white px-3">%</span>
+            <label for="inflation" class="text-lg block mb-2 text-gray-900 font-bold tracking-wide">Simulate an average annual rate of inflation?</label>
+            <p class="mb-4 text-gray-800">3% is considered the average rate of inflation</p>
+            <div class="relative rounded-sm shadow-sm w-32">
+              <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                <span class="text-gray-500">%</span>
+              </div>
+              <input type="number" id="inflation" name="inflation" value="3" class="p-2 focus:ring-teal-600 focus:border-teal-600 block w-full pl-4 pr-10 border-gray-400 rounded-md">
             </div>
           </div>
 
-          <div class="my-5">
-            <label for="inflation-regular" class="text-lg block mb-3 text-gray-900 font-bold tracking-wide">Increase regular contributions by the same rate per year?</label>
-            <p class="mb-4 text-gray-900">Unchecking this option will decrease the purchasing power of your contributions year-on-year.</p>
-            <label class="font-bold">
-              <input id="inflation-regular" class="mr-1" type="checkbox" name="regular_inflation" checked>
-              Yes, increase my regular contributions annually by the above rate of inflation
-            </label>
+          <div class="my-5 flex items-start">
+            <div class="flex items-center h-5">
+              <input id="inflation-regular" name="regular_inflation" type="checkbox" class="focus:ring-teal-600 h-4 w-4 text-teal-600 border-gray-300 rounded" checked>
+            </div>
+            <div class="ml-3">
+              <label for="inflation-regular" class="font-semibold mb-1 inline-block">Increase regular contributions by the same rate per year?</label>
+              <p class="text-gray-600">Unchecking this option will decrease the purchasing power of your contributions year-on-year.</p>
+            </div>
           </div>
+
+
         </fieldset>
 
         <div class="p3 py-4 text-right">
-          <button type="submit" class="bg-gray-700 font-semibold tracking-wide text-xl uppercase text-white p-2 px-6">Go</button>
+          <button type="submit" class="bg-gray-700 shadow font-semibold tracking-wide text-xl uppercase text-white p-2 px-6 focus:bg-teal-700 transform focus:translate-y-0.5 focus:outline-none rounded-md">Go</button>
         </div>
       </div>
 
       <!--<fieldset class="bg-gray-300 p-5 inline-block shadow-xl">
         <legend class="bg-white py-1 px-2 text-2xl font-semibold">How much do I need to invest?</legend>
-        <div class="p-3 py-4">
-          <label class="block mb-3 tracking-wide text-lg font-semibold">How old are you?</label>
+        <div class="py-4">
+          <label class="block mb-2 tracking-wide text-lg font-semibold">How old are you?</label>
           <input class="py-2 px-4 w-20" type="number">
         </div>
-        <div class="p-3 py-4">
-          <label class="block mb-3 tracking-wide text-lg font-semibold">What age do you want to retire at?</label>
+        <div class="py-4">
+          <label class="block mb-2 tracking-wide text-lg font-semibold">What age do you want to retire at?</label>
           <input class="py-2 px-4 w-20" type="number">
         </div>
-        <div class="p-3 py-4">
-          <label class="block mb-3 tracking-wide text-lg font-semibold">What is the initial size of your investment?</label>
+        <div class="py-4">
+          <label class="block mb-2 tracking-wide text-lg font-semibold">What is the initial size of your investment?</label>
           <div class="bg-gray-500 p-1 inline-block">
             <span class="text-white px-3">£</span>
             <input class="py-2 px-4 w-60" type="number">
           </div>
         </div>
-        <div class="p-3 py-4">
-          <label class="block mb-3 tracking-wide text-lg font-semibold">What annual salary do your want to retire on?</label>
+        <div class="py-4">
+          <label class="block mb-2 tracking-wide text-lg font-semibold">What annual salary do your want to retire on?</label>
           <div class="bg-gray-500 p-1 inline-block">
             <span class="text-white px-3">£</span>
             <input class="py-2 px-4 w-72" type="number">

@@ -17,6 +17,7 @@
     "vite": "^2.0.1"
   },
   "dependencies": {
+    "@tailwindcss/forms": "^0.3.2",
     "chart.js": "^2.9.4"
   }
 }
