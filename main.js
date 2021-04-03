@@ -154,6 +154,7 @@ function renderChart(data, adjustSlider = true) {
   document.querySelector('[data-initial]').innerText = formatMoney(data.initial)
   document.querySelector('[data-retirement-term]').innerText = data.returns.length
   document.querySelector('[data-salary]').innerText = formatMoney(data.annual_salary)
+  document.querySelector('[data-adjusted-salary]').innerText = formatMoney(data.adjusted_annual_salary)
   document.querySelector('[data-inflation]').innerText = data.inflation
   years.value = data.returns.length
 
