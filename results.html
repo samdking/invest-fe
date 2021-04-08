@@ -12,9 +12,14 @@
 
 <body>
   <div class="max-w-screen-lg m-auto gap-5 w-full p-5">
+    <h1 class="mx-8 sm:mx-0 my-5 text-3xl font-semibold">Your results</h1>
+    <img src="spinner.svg" id="spinner" class="m-auto">
     <canvas id="myChart"></canvas>
     <div class="mt-6">
       <div id="explanation" class="hidden text-2xl leading-relaxed space-y-2">
+        <h2 class="text-3xl font-bold mb-4" data-positive>
+          Your retirement age is <span data-retirement-age></span>.
+        </h2>
         <p>
           With an initial investment of <strong class="text-green-600">£<span data-initial></span></strong>
           and regular <span data-regular-frequency></span> contributions of <strong class="text-green-600">£<span data-regular></span></strong>,
@@ -35,7 +40,7 @@
           Inflation is set at <strong><span data-inflation></span>%</strong>.
         </p>
       </div>
-      <form id="tweak-form">
+      <form id="tweak-form" class="hidden">
         <div class="grid md:grid-cols-2 gap-x-3 gap-y-5 my-7">
           <fieldset class="bg-gray-100 p-5 border-dashed border-gray-300 border-2 md:text-lg text-xl">
             <legend class="px-2 mx-auto md:-mx-2 wide font-bold">Regular contributions</legend>

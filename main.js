@@ -9,6 +9,8 @@ const rateSlider = document.getElementById('rate')
 const regularBoosts = document.querySelectorAll('[data-plus]')
 const chart = document.getElementById('myChart')
 const inflation = document.getElementById('inflation')
+const spinner = document.getElementById('spinner')
+const tweakForm = document.getElementById('tweak-form')
 
 const store = window.localStorage.getItem('invest_data')
 const data = store ? JSON.parse(store) : null
@@ -75,6 +77,11 @@ function populateChartWithData(data) {
   })
     .then(response => response.json())
     .then(data => renderChart(data.investment))
+    .then(data => {
+      spinner.classList.add('hidden')
+      tweakForm.classList.remove('hidden')
+      return data
+    })
 }
 
 function refreshValues(e) {
@@ -139,6 +146,7 @@ function formatMoney(amount) {
 
 function renderChart(data, adjustSlider = true) {
   const returns = data.returns.map(year => year.returns)
+  const retirementAge = [...data.returns].reverse()[0].age
   const invested = data.invested
   const labels = data.returns.map(year => year.age)
   const ctx = chart ? chart.getContext('2d') : null
@@ -156,6 +164,7 @@ function renderChart(data, adjustSlider = true) {
   document.querySelector('[data-salary]').innerText = formatMoney(data.annual_salary)
   document.querySelector('[data-adjusted-salary]').innerText = formatMoney(data.adjusted_annual_salary)
   document.querySelector('[data-inflation]').innerText = data.inflation
+  document.querySelector('[data-retirement-age]').innerText = retirementAge
   years.value = data.returns.length
 
   if (ctx) {
