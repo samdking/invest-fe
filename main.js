@@ -152,7 +152,6 @@ function renderChart(data, adjustSlider = true) {
   const years = document.getElementById('fix-years')
 
   document.getElementById('explanation').classList.remove('hidden')
-  document.getElementById('target').classList.remove('hidden')
   document.querySelector('[data-returns]').innerText = formatMoney(data.total_returns)
   document.querySelector('[data-invested]').innerText = formatMoney(data.total_invested)
   document.querySelector('[data-duration]').innerText = returns.length
@@ -168,6 +167,8 @@ function renderChart(data, adjustSlider = true) {
   document.querySelector('[data-target-age]').innerText = targetAge
   document.querySelector('[data-target-regular]').innerText = formatMoney(data.regular_target.amount)
   document.querySelector('[data-target-regular-frequency]').innerText = data.regular_target.frequency.toLowerCase()
+
+  document.getElementById('target').classList.toggle('hidden', parseInt(targetAge) >= parseInt(retirementAge))
 
   years.value = data.returns.length
 
