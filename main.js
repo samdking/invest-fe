@@ -127,13 +127,11 @@ function boostRegular(e) {
 function specifyRegular(e) {
   e.preventDefault()
 
-  if (e.target.value == '') return
-
   regularBoosts.forEach(elem => {
     elem.classList.remove('opacity-30')
   })
 
-  regularAmount.value = e.target.value
+  regularAmount.value = e.target.value || regularAmount.dataset.base
 
   refreshValues(e)
 }
@@ -147,6 +145,7 @@ function formatMoney(amount) {
 function renderChart(data, adjustSlider = true) {
   const returns = data.returns.map(year => year.returns)
   const retirementAge = [...data.returns].reverse()[0].age
+  const targetAge = data.target_age
   const invested = data.invested
   const labels = data.returns.map(year => year.age)
   const ctx = chart ? chart.getContext('2d') : null
@@ -165,6 +164,12 @@ function renderChart(data, adjustSlider = true) {
   document.querySelector('[data-adjusted-salary]').innerText = formatMoney(data.adjusted_annual_salary)
   document.querySelector('[data-inflation]').innerText = data.inflation
   document.querySelector('[data-retirement-age]').innerText = retirementAge
+  document.querySelector('[data-target-age]').innerText = targetAge
+  document.querySelector('[data-target-regular]').innerText = formatMoney(data.regular_target.amount)
+  document.querySelector('[data-target-regular-frequency]').innerText = data.regular_target.frequency.toLowerCase()
+
+  document.getElementById('target').classList.toggle('hidden', parseInt(targetAge) >= parseInt(retirementAge))
+
   years.value = data.returns.length
 
   if (ctx) {

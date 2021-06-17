@@ -12,11 +12,10 @@
 
 <body>
   <div class="max-w-screen-lg m-auto gap-5 w-full p-5">
-    <h1 class="mx-8 sm:mx-0 my-5 text-3xl font-semibold">Your results</h1>
     <img src="spinner.svg" id="spinner" class="m-auto">
     <canvas id="myChart"></canvas>
-    <div class="mt-6">
-      <div id="explanation" class="hidden text-2xl leading-relaxed space-y-2">
+    <div class="mt-6 mb-5">
+      <div id="explanation" class="hidden text-2xl leading-relaxed space-y-2 my-6">
         <h2 class="text-3xl font-bold mb-4" data-positive>
           Your retirement age is <span data-retirement-age></span>.
         </h2>
@@ -40,10 +39,19 @@
           Inflation is set at <strong><span data-inflation></span>%</strong>.
         </p>
       </div>
+      <div id="target" class="hidden text-2xl leading-relaxed space-y-2 my-6">
+        <h2 class="text-3xl font-bold mb-4">
+          How can I retire at age <span data-target-age>50</span>?
+        </h2>
+        <p>
+          You will need to increase your regular contributions to <strong class="text-green-600">£<span data-target-regular></span></strong> <span data-target-regular-frequency></span>.
+        </p>
+      </div>
       <form id="tweak-form" class="hidden">
         <div class="grid md:grid-cols-2 gap-x-3 gap-y-5 my-7">
-          <fieldset class="bg-gray-100 p-5 border-dashed border-gray-300 border-2 md:text-lg text-xl">
-            <legend class="px-2 mx-auto md:-mx-2 wide font-bold">Regular contributions</legend>
+          <fieldset class="bg-gray-100 p-5 pt-3 border-dashed border-gray-300 border-2">
+            <legend class="px-2 mx-auto md:-mx-2 wide font-bold md:text-lg text-xl">Regular contributions</legend>
+            <p class="pb-5">Increase your regular contribution amount or fill in a custom amount to demonstrate the effect on your returns.</p>
             <button data-plus="50" class="rounded-md mx-1 bg-red-400 py-1 px-2 text-white text-sm font-semibold">+50</button>
             <button data-plus="100" class="rounded-md mx-1 bg-red-600 py-1 px-2 text-white text-sm font-semibold">+100</button>
             <button data-plus="250" class="rounded-md mx-1 bg-red-700 py-1 px-2 text-white text-sm font-semibold">+250</button>
@@ -51,9 +59,9 @@
             <input type="hidden" name="regular_amount" id="regular-amount">
           </fieldset>
 
-          <fieldset class="bg-gray-100 p-5 border-dashed border-gray-300 border-2 text-lg">
-            <legend class="px-2 mx-auto md:-mx-2 wide font-bold">Rate of return</legend>
-
+          <fieldset class="bg-gray-100 p-5 pt-3 border-dashed border-gray-300 border-2">
+            <legend class="px-2 mx-auto md:-mx-2 wide font-bold md:text-lg text-xl">Rate of return</legend>
+            <p class="pb-5">Increase your average rate of return to demonstrate the effect on your returns.</p>
             <span data-rate-min></span>%
             <input class="mx-2" type="range" name="rate" id="rate">
             <span data-rate-max></span>%

@@ -40,6 +40,13 @@
         </div>
 
         <div class="py-4">
+          <label for="target_age" class="block mb-2 tracking-wide text-lg font-semibold">What is your target retirement age? <em>(Optional)</em></label>
+          <div class="rounded-sm shadow-sm w-32">
+            <input type="number" id="target_age" name="target_age" class="text-gray-800 p-2 focus:ring-teal-600 focus:border-teal-600 block w-full pl-4 border-gray-400 rounded-md">
+          </div>
+        </div>
+
+        <div class="py-4">
           <label for="initial" class="block mb-2 tracking-wide text-lg font-semibold">What is the initial size of your investment?</label>
           <div class="relative rounded-sm shadow-sm max-w-md mt-4">
             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -95,7 +102,7 @@
           <legend class="text-lg px-2 font-bold tracking-wide">Inflation</legend>
           <div class="my-6">
             <label for="inflation" class="text-lg block mb-2 font-bold tracking-wide">Simulate an average annual rate of inflation?</label>
-            <p class="mb-4 text-gray-200">3% is considered the average rate of inflation</p>
+            <p class="mb-4 text-gray-200">3% is considered the average rate of inflation.</p>
             <div class="relative rounded-sm shadow-sm w-32">
               <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
                 <span class="text-gray-500">%</span>
@@ -111,7 +118,7 @@
             </div>
             <div class="ml-3">
               <label for="inflation-regular" class="font-semibold mb-1 inline-block">Increase regular contributions by the same rate per year?</label>
-              <p class="text-gray-200">Unchecking this option will decrease the purchasing power of your contributions year-on-year.</p>
+              <p class="text-gray-200">Unchecking this option means inflation will decrease the purchasing power of your contributions year-on-year.</p>
             </div>
           </div>
 
