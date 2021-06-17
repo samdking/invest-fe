@@ -170,7 +170,7 @@ function renderChart(data, adjustSlider = true) {
 
   document.getElementById('target').classList.toggle('hidden', parseInt(targetAge) >= parseInt(retirementAge))
 
-  years.value = data.returns.length
+  // years.value = data.returns.length
 
   if (ctx) {
     new Chart(ctx, {
