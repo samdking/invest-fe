@@ -164,14 +164,16 @@ function renderChart(data, adjustSlider = true) {
   document.querySelector('[data-adjusted-salary]').innerText = formatMoney(data.adjusted_annual_salary)
   document.querySelector('[data-inflation]').innerText = data.inflation
   document.querySelector('[data-retirement-age]').innerText = retirementAge
-  
+
   if (targetAge) {
     document.querySelector('[data-target-age]').innerText = targetAge
     document.querySelector('[data-target-regular]').innerText = formatMoney(data.regular_target.amount)
     document.querySelector('[data-target-regular-frequency]').innerText = data.regular_target.frequency.toLowerCase()
+    document.getElementById('target').classList.toggle('hidden', parseInt(targetAge) >= parseInt(retirementAge))
+  } else {
+    document.getElementById('target').classList.add('hidden')
   }
 
-  document.getElementById('target').classList.toggle('hidden', parseInt(targetAge) >= parseInt(retirementAge))
 
   // years.value = data.returns.length
 
